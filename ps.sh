@@ -20,5 +20,5 @@ git commit -m "$commit_msg"
 
 # 使用 HTTPS + token 推送
 
-#git push "https://${USERNAME}:${TOKEN}@${REPO}" $branch
+git push "https://${USERNAME}:${TOKEN}@${REPO}" $branch
 
