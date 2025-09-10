@@ -2,10 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
+  namespace: nginx
   labels:
     app: nginx
 spec:
-  replicas: 3  # 创建2个副本
+  replicas: 2
   selector:
     matchLabels:
       app: nginx
@@ -16,7 +17,25 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.25
+          image: nginx:latest
           ports:
             - containerPort: 80
-
+          resources:
+            requests:
+              cpu: "100m"        # 容器启动时保留的最小 CPU
+              memory: "128Mi"    # 容器启动时保留的最小内存
+            limits:
+              cpu: "500m"        # 容器使用 CPU 的最大限制
+              memory: "256Mi"    # 容器使用内存的最大限制
+          livenessProbe:        # 健康检查
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:       # 就绪检查
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
