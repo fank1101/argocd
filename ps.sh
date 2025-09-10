@@ -12,12 +12,13 @@ if [ -z "$commit_msg" ]; then
 fi
 
 # 获取当前分支
-branch=$(git rev-parse --abbrev-ref HEAD)
+#branch=$(git rev-parse --abbrev-ref HEAD)
 
 # 执行 git 操作
 git add .
 git commit -m "$commit_msg"
 
 # 使用 HTTPS + token 推送
-git push "https://${USERNAME}:${TOKEN}@${REPO}" $branch
+
+#git push "https://${USERNAME}:${TOKEN}@${REPO}" $branch
 
